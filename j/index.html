@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join my convoy on Kaafila</title>
+  <meta name="description" content="Tap to join the convoy in Kaafila, the walkie-talkie for cars travelling together.">
+  <meta property="og:title" content="Join my convoy on Kaafila">
+  <meta property="og:description" content="Tap to join the convoy in Kaafila, the walkie-talkie for cars travelling together.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#1C1D20">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<main>
+  <header class="brand">
+    <img src="../assets/icon-192.png" alt="">
+    <a href="../">Kaafila</a>
+  </header>
+
+  <h1>You're invited to a convoy</h1>
+  <p class="lead" id="lead">Open this invite in the Kaafila app on your phone.</p>
+
+  <div class="card">
+    <div class="muted">Journey code</div>
+    <div class="code" id="code">······</div>
+  </div>
+
+  <div class="buttons">
+    <a class="button" id="open" href="#">Open in Kaafila</a>
+    <a class="button secondary" href="https://play.google.com/store/apps/details?id=com.ismailsaiyyed.kaafila">Get Kaafila on Google Play</a>
+  </div>
+
+  <p class="muted" id="help">Nothing happened? Install Kaafila, open it, tap <b>Join with code</b> and type the code above.</p>
+  <p class="muted">On an iPhone? Kaafila is on Android for now.</p>
+
+  <footer>
+    <a href="../privacy.html">Privacy policy</a>
+    <a href="../">About Kaafila</a>
+  </footer>
+</main>
+<script>
+  // Invite links look like …/j/?code=ABC234. GitHub Pages cannot rewrite
+  // paths, so the code travels as a query parameter.
+  (function () {
+    var alphabet = /^[A-HJ-KMNP-Z2-9]{6}$/;
+    var raw = new URLSearchParams(location.search).get('code') || '';
+    var code = raw.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    var codeEl = document.getElementById('code');
+    var open = document.getElementById('open');
+    if (!alphabet.test(code)) {
+      codeEl.textContent = '—';
+      open.style.display = 'none';
+      document.getElementById('lead').textContent = 'This invite link looks incomplete.';
+      document.getElementById('help').textContent = 'Ask the person who invited you for the 6-character journey code.';
+      return;
+    }
+    codeEl.textContent = code.slice(0, 3) + ' ' + code.slice(3);
+    var deepLink = 'kaafila://join/' + code;
+    open.href = deepLink;
+    if (/Android/i.test(navigator.userAgent)) {
+      setTimeout(function () { location.href = deepLink; }, 300);
+    }
+  })();
+</script>
+</body>
+</html>

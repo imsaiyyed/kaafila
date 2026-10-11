@@ -21,16 +21,19 @@ assets/         Stylesheet, icons
 3. After a minute the site is at `https://<your-user>.github.io/kaafila/`.
    A custom domain can be added on the same settings page.
 
-## After it is live
+## Live site
 
-Tell Claude the site URL. It then:
+Published at **https://imsaiyyed.github.io/kaafila/**. That address is wired in:
 
-- sets `Links.siteUrl` in `app/lib/app/links.dart`, so the app's invite
-  links, QR codes, "Privacy policy" and "Delete my data" point here;
-- adds the absolute `og:image` preview to `j/index.html`.
+- `Links.siteUrl` in `app/lib/app/links.dart`: the app's invite links, QR
+  codes, "Privacy policy" and "Delete my data" point here;
+- the absolute `og:image` link previews in `index.html` and `j/index.html`.
 
-In Play Console use `<site>/privacy.html` as the privacy policy URL and
-`<site>/delete.html` as the account-deletion URL.
+If the address ever changes (for example to a custom domain), update both.
+
+In Play Console use https://imsaiyyed.github.io/kaafila/privacy.html as the
+privacy policy URL and https://imsaiyyed.github.io/kaafila/delete.html as the
+account-deletion URL.
 
 Invite links need the app to handle `kaafila://join/CODE`, which it already
 does. All links in these pages are relative, so the site also works from a
